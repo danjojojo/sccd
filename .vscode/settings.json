@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "page_template.h": "c",
+        "utils.h": "c",
+        "tft_espi.h": "c",
+        "arduino.h": "c",
+        "globals.h": "c",
+        "connection.h": "c",
+        "wifi.h": "c",
+        "load_states.h": "c"
+    }
+}
