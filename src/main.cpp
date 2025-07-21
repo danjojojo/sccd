@@ -2,28 +2,28 @@
 #include <Arduino.h>
 
 // FOR BUTTON INTERACTION AND NAVIGATION
-#include "C_Page.h"
-#include "C_Button.h"
-#include "C_PageManager.h"
-#include "C_PageTemplate.h"
+#include "../include/class/button.h"
+#include "../include/class/page.h"
+#include "../include/class/page_template.h"
+#include "../include/core/page_manager.h"
 
 // MAIN PAGES
-#include "P_Settings.h"
-#include "P_MakeReady.h"
-#include "P_Timer.h"
+#include "../include/pages/settings.h"
+#include "../include/pages/make_ready.h"
+#include "../include/pages/timer.h"
 
 // SETTING OPTIONS
-#include "P_PlateBoardManager.h"
-#include "P_Random.h"
-#include "P_SetTheme.h"
-#include "P_EditAfterMatch.h"
-#include "P_Logs.h"
+#include "../include/pages/logs.h"
+#include "../include/pages/plate_board_manager.h"
+#include "../include/pages/set_random.h"
+#include "../include/pages/set_theme.h"
+#include "../include/pages/edit_after_match.h"
 
 // CONSTANTS
-#include "H_Constants.h"
+#include "../include/constants/constants.h"
 
 // LOAD STATES
-#include "H_LoadStates.h"
+#include "../include/state/load_states.h"
 
 Button btn(LEFT_BUTTON, RIGHT_BUTTON);
 PageManager pageManager;
