@@ -16,4 +16,6 @@ int getOptionsCount(T (&array)[N])
     return N;
 }
 
+void getItemsPerPage(int optionsCount);
+
 #endif

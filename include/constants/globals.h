@@ -75,4 +75,11 @@ extern bool STOP_TIMER;
 extern ESPNowData TOSUBMIT_DATA;
 extern ESPNowData RECEIVED_DATA;
 
+// DRAW OPTIONS
+extern int PAGE_LIMIT;
+extern const int MAX_PAGES;
+extern int PAGES;
+extern int COLUMNS[];
+extern int CURRENT_PAGE;
+
 #endif

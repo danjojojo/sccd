@@ -30,6 +30,9 @@ public:
     void drawOptions(LabelPageOptionsStruct options[], int optionsCount, int selectedOption);
     void drawOptions(LabelValuePageOptionsStruct options[], int optionsCount, int selectedOption, String currentValue);
     void drawOptions(LabelIntValueLimitPageOptionsStruct options[], int optionsCount, int selectedOption, uint16_t selectedOptionFontColor, String optionName, bool condition);
+    void drawPaginatedOptions(LabelPageOptionsStruct options[], int optionsCount, int selectedOption);
+    void drawLogs(int logsCount, int selectedLogNum);
+    void drawPaginatedLogs(int logsCount, int selectedLogNum);
 };
 
 #endif

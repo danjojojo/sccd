@@ -29,5 +29,31 @@ BatteryLevels getBatteryLevel(float voltage)
 
 int listOptionsPadding(int optionIndex)
 {
-    return (30 * (optionIndex + 1) + 10);
+    return (40 * (optionIndex + 1) + 10);
+}
+
+void getItemsPerPage(int optionsCount)
+{
+    PAGES = 0;
+    for (int i = 0; i < MAX_PAGES; i++)
+    {
+        COLUMNS[i] = 0;
+    }
+
+    PAGES = ceil(optionsCount / PAGE_LIMIT);
+    COLUMNS[0] = PAGE_LIMIT;
+
+    for (int i = 1; i <= PAGES; i++)
+    {
+        int rem = optionsCount - PAGE_LIMIT;
+        if (rem < PAGE_LIMIT)
+        {
+            COLUMNS[i] = rem;
+        }
+        else
+        {
+            COLUMNS[i] = rem - (rem - PAGE_LIMIT);
+            optionsCount = rem;
+        }
+    }
 }

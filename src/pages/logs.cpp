@@ -13,9 +13,6 @@ LogsPage::LogsPage(Button &btn, PageManager &manager)
 
 void LogsPage::drawLogs()
 {
-    tft.fillRect(0, 100, tft.width(), 30, BG_COLOR);
-    tft.setTextDatum(ML_DATUM);
-
     if (logsCount == 0)
     {
         tft.setTextColor(TFT_DARKGREY);
@@ -23,20 +20,22 @@ void LogsPage::drawLogs()
         return;
     }
 
-    int line = 0;
-    for (int i = logsCount - 1; i >= 0; i--)
-    {
-        if (i == selectedLogNum)
-        {
-            tft.setTextColor(FG_COLOR);
-        }
-        else
-        {
-            tft.setTextColor(TFT_DARKGREY);
-        }
-        tft.drawString(TIMER_LOGS[i], 5, listOptionsPadding(line));
-        line++;
-    }
+    page.drawPaginatedLogs(logsCount, selectedLogNum);
+
+    // int line = 0;
+    // for (int i = logsCount - 1; i >= 0; i--)
+    // {
+    //     if (i == selectedLogNum)
+    //     {
+    //         tft.setTextColor(FG_COLOR);
+    //     }
+    //     else
+    //     {
+    //         tft.setTextColor(TFT_DARKGREY);
+    //     }
+    //     tft.drawString(TIMER_LOGS[i], 5, listOptionsPadding(line));
+    //     line++;
+    // }
 }
 
 void LogsPage::drawStatusBar()
@@ -46,12 +45,12 @@ void LogsPage::drawStatusBar()
 
 void LogsPage::enter()
 {
+    logsCount = TIMER_LOG_NUM;
+    getItemsPerPage(logsCount);
+    selectedLogNum = (logsCount > 0) ? (logsCount - 1) : 0;
+    
     page.tftInit();
     drawStatusBar();
-
-    logsCount = TIMER_LOG_NUM;
-    selectedLogNum = (logsCount > 0) ? (logsCount - 1) : 0;
-
     drawLogs();
     page.drawButtons(RIGHT, "Exit");
 }
