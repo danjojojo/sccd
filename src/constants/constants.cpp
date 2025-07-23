@@ -63,3 +63,10 @@ bool CONNECTED = false;
 bool STOP_TIMER = false;
 ESPNowData TOSUBMIT_DATA = {false, false, false, false};
 ESPNowData RECEIVED_DATA = {false, false, false, false};
+
+// DRAW OPTIONS
+int PAGE_LIMIT = 4;
+const int MAX_PAGES = 10;
+int COLUMNS[MAX_PAGES];
+int PAGES = 0;
+int CURRENT_PAGE = 0;

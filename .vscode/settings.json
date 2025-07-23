@@ -8,6 +8,7 @@
         "globals.h": "c",
         "connection.h": "c",
         "wifi.h": "c",
-        "load_states.h": "c"
+        "load_states.h": "c",
+        "algorithm": "cpp"
     }
 }

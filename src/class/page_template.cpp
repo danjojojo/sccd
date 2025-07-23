@@ -12,6 +12,7 @@ void PageTemplate::tftInit()
     tft.setTextColor(FG_COLOR);
     tft.setCursor(0, 0, 2);
     tft.setTextSize(1);
+    tft.setTextWrap(true, false);
 }
 
 void PageTemplate::drawStatusBar()
@@ -139,5 +140,105 @@ void PageTemplate::drawOptions(LabelIntValueLimitPageOptionsStruct options[], in
             condition &&optionName == options[i].label ? tft.setTextColor(selectedOptionFontColor) : tft.setTextColor(TFT_DARKGREY);
             tft.drawNumber(*options[i].value, tft.width(), listOptionsPadding(i));
         }
+    }
+}
+
+void PageTemplate::drawPaginatedOptions(LabelPageOptionsStruct options[], int optionsCount, int selectedOption)
+{
+
+    if (optionsCount <= PAGE_LIMIT)
+        return drawOptions(options, optionsCount, selectedOption);
+
+    if (selectedOption != 0 && selectedOption % PAGE_LIMIT == 0)
+    {
+        CURRENT_PAGE += 1;
+    }
+    else if (selectedOption == 0)
+    {
+        CURRENT_PAGE = 0;
+    }
+
+    int startCount = CURRENT_PAGE * PAGE_LIMIT;
+
+    tft.fillRect(0, 20, tft.width(), 180, BG_COLOR);
+    tft.setTextDatum(ML_DATUM);
+    for (int i = startCount; i < startCount + COLUMNS[CURRENT_PAGE]; i++)
+    {
+        if (i == selectedOption)
+        {
+            tft.setTextColor(FG_COLOR);
+        }
+        else
+        {
+            tft.setTextColor(TFT_DARKGREY);
+        }
+        tft.drawString(options[i].label, 5, listOptionsPadding(i % PAGE_LIMIT));
+    }
+}
+
+void PageTemplate::drawLogs(int logsCount, int selectedLogNum)
+{
+    tft.fillRect(0, 100, tft.width(), 30, BG_COLOR);
+    tft.setTextDatum(ML_DATUM);
+
+    if (logsCount == 0)
+    {
+        tft.setTextColor(TFT_DARKGREY);
+        tft.drawString("No logs here.", 5, listOptionsPadding(0));
+        return;
+    }
+
+    int line = 0;
+    for (int i = logsCount - 1; i >= 0; i--)
+    {
+        if (i == selectedLogNum)
+        {
+            tft.setTextColor(FG_COLOR);
+        }
+        else
+        {
+            tft.setTextColor(TFT_DARKGREY);
+        }
+        tft.drawString(TIMER_LOGS[i], 5, listOptionsPadding(line));
+        line++;
+    }
+}
+
+void PageTemplate::drawPaginatedLogs(int logsCount, int selectedLogNum)
+{
+
+    if (logsCount <= PAGE_LIMIT)
+        return drawLogs(logsCount, selectedLogNum);
+
+    bool logsCountIsEven = (logsCount - 1) % 2 == 0;
+    int remainder = logsCountIsEven ? 0 : 1;
+
+    if (selectedLogNum != logsCount - 1 && selectedLogNum % PAGE_LIMIT == remainder)
+    {
+        CURRENT_PAGE += 1;
+    }
+    else if (selectedLogNum == logsCount - 1)
+    {
+        CURRENT_PAGE = 0;
+    }
+
+    int startCount = (logsCount - 1) - (CURRENT_PAGE * PAGE_LIMIT);
+
+    tft.fillRect(0, 20, tft.width(), 180, BG_COLOR);
+    tft.setTextDatum(ML_DATUM);
+
+    int line = 0;
+    for (int i = startCount; i > startCount - COLUMNS[CURRENT_PAGE]; i--)
+    {
+        if (i == selectedLogNum)
+        {
+            tft.setTextColor(FG_COLOR);
+        }
+        else
+        {
+            tft.setTextColor(TFT_DARKGREY);
+        }
+        tft.drawString(TIMER_LOGS[i], 5, listOptionsPadding(line % PAGE_LIMIT));
+        line++;
     }
 }

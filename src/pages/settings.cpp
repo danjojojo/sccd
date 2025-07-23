@@ -12,10 +12,12 @@ LabelPageOptionsStruct settingOptions[] = {
     {"Timer Logs", &logsPage},
     {"Change Theme", &setThemePage},
     {"Exit to Main Menu", &makeReadyPage},
-    {"Turn Off", nullptr}};
+    {"Turn Off", nullptr},
+};
 
 int settingOptionsCount = getOptionsCount(settingOptions);
 int selectedSettingOption = 0;
+int settingsCurrentPage = 0;
 
 SettingsPage::SettingsPage(Button &btn, PageManager &manager)
     : button(btn), pageManager(manager), page(tft)
@@ -25,7 +27,10 @@ SettingsPage::SettingsPage(Button &btn, PageManager &manager)
 
 void SettingsPage::drawOptions()
 {
-    page.drawOptions(settingOptions, settingOptionsCount, selectedSettingOption);
+    Serial.print("Options count: ");
+    Serial.println(settingOptionsCount);
+    page.drawPaginatedOptions(settingOptions, settingOptionsCount, selectedSettingOption);
+    // page.drawOptions(settingOptions, settingOptionsCount, selectedSettingOption);
 }
 
 void SettingsPage::drawButtons()
@@ -40,6 +45,7 @@ void SettingsPage::drawStatusBar()
 
 void SettingsPage::enter()
 {
+    getItemsPerPage(settingOptionsCount);
     page.tftInit();
     drawStatusBar();
     drawOptions();
