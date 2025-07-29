@@ -7,7 +7,7 @@ Pangodream_18650_CL BL(ADC_PIN, CONV_FACTOR, READS);
 Connection connect;
 
 // DISPLAY
-int DISPLAY_ROTATION = 0; // 0,2 = Portrait, 1,3 = Landscape
+int DISPLAY_ROTATION = 1; // 0,2 = Portrait, 1,3 = Landscape
 
 // THEMES
 uint16_t BG_COLOR = TFT_BLACK;
@@ -36,7 +36,7 @@ bool BUZZER_PLAYED = false;
 
 // TIMER_LOGS
 int32_t TIMER_LOG_NUM = 0;
-const int MAX_LOGS = 6;
+const int MAX_LOGS = 10;
 String TIMER_LOGS[MAX_LOGS];
 
 // RANDOM START
@@ -50,8 +50,8 @@ String CURRENT_RANDOM_START;
 // BATTERY
 int SENSOR_VALUE;
 float VOLTAGE;
-String BATTERY_LEVEL;
-// int BATTERY_LEVEL;
+// String BATTERY_LEVEL;
+int BATTERY_LEVEL;
 
 // INTERVAL
 unsigned long LAST_ACTION_TIME = 0;
@@ -65,8 +65,13 @@ ESPNowData TOSUBMIT_DATA = {false, false, false, false};
 ESPNowData RECEIVED_DATA = {false, false, false, false};
 
 // DRAW OPTIONS
-int PAGE_LIMIT = 4;
+int PAGE_ITEMS_LIMIT = 4;
 const int MAX_PAGES = 10;
 int COLUMNS[MAX_PAGES];
 int PAGES = 0;
 int CURRENT_PAGE = 0;
+int START_COUNT = 0;
+int REFRESH_HEIGHT = 0;
+
+// ORIENTATION
+String CURRENT_ORIENTATION;

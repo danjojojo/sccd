@@ -2,17 +2,21 @@
 
 extern PlateBoardManagerPage plateBoardManagerPage;
 extern RandomPage randomPage;
+extern SetOrientationPage setOrientationPage;
 extern SetThemePage setThemePage;
 extern LogsPage logsPage;
 extern MakeReadyPage makeReadyPage;
+extern TurnOffPage turnOffPage;
 
 LabelPageOptionsStruct settingOptions[] = {
-    {"Plates and Boards", &plateBoardManagerPage},
-    {"Random Start", &randomPage},
-    {"Timer Logs", &logsPage},
-    {"Change Theme", &setThemePage},
-    {"Exit to Main Menu", &makeReadyPage},
-    {"Turn Off", nullptr},
+    {"PB MANAGER", &plateBoardManagerPage},
+    {"RANDOM START", &randomPage},
+    {"TIMER LOGS", &logsPage},
+    // {"ORIENTATION", &setOrientationPage},
+    {"THEMES", &setThemePage},
+    {"MAIN MENU", &makeReadyPage},
+    {"TURN OFF", nullptr},
+    // {"TURN OFF", &turnOffPage},
 };
 
 int settingOptionsCount = getOptionsCount(settingOptions);
@@ -27,10 +31,7 @@ SettingsPage::SettingsPage(Button &btn, PageManager &manager)
 
 void SettingsPage::drawOptions()
 {
-    Serial.print("Options count: ");
-    Serial.println(settingOptionsCount);
-    page.drawPaginatedOptions(settingOptions, settingOptionsCount, selectedSettingOption);
-    // page.drawOptions(settingOptions, settingOptionsCount, selectedSettingOption);
+    page.drawPaginatedOptions(settingOptions, settingOptionsCount, selectedSettingOption, true);
 }
 
 void SettingsPage::drawButtons()
@@ -41,6 +42,14 @@ void SettingsPage::drawButtons()
 void SettingsPage::drawStatusBar()
 {
     page.drawStatusBar();
+}
+
+void SettingsPage::shutOffDisplay()
+{
+    delay(300);
+    esp_sleep_enable_ext1_wakeup(BITMASK, ESP_EXT1_WAKEUP_ALL_LOW);
+    digitalWrite(DISPLAY_BACKLIT, LOW);
+    esp_deep_sleep_start();
 }
 
 void SettingsPage::enter()
@@ -57,14 +66,6 @@ void SettingsPage::exit()
     Serial.println("Exiting Settings page");
 }
 
-void SettingsPage::shutOffDisplay()
-{
-    delay(300);
-    esp_sleep_enable_ext1_wakeup(BITMASK, ESP_EXT1_WAKEUP_ALL_LOW);
-    digitalWrite(DISPLAY_BACKLIT, LOW);
-    esp_deep_sleep_start();
-}
-
 void SettingsPage::handleButtonPress()
 {
     ButtonType btnType = button.getButtonPressed();
@@ -77,13 +78,13 @@ void SettingsPage::handleButtonPress()
         drawOptions();
         break;
     case RIGHT_ONCE:
-        if (settingOptions[selectedSettingOption].targetPage != nullptr)
+        if (settingOptions[selectedSettingOption].targetPage == nullptr)
         {
-            pageManager.setPage(settingOptions[selectedSettingOption].targetPage);
+            shutOffDisplay();
         }
         else
         {
-            shutOffDisplay();
+            pageManager.setPage(settingOptions[selectedSettingOption].targetPage);
         }
         selectedSettingOption = 0;
         break;

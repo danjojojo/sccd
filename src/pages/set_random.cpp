@@ -3,9 +3,9 @@
 extern SettingsPage settingsPage;
 
 LabelValuePageOptionsStruct randomOptions[] = {
-    {"Random On", "RANDOM_ON", nullptr},
-    {"Random Off", "RANDOM_OFF", nullptr},
-    {"Back to Settings", nullptr, &settingsPage}};
+    {"RANDOM ON", "RANDOM_ON", nullptr},
+    {"RANDOM OFF", "RANDOM_OFF", nullptr},
+    {"Exit", nullptr, &settingsPage}};
 
 int selectedRandomOption = 0;
 int randomOptionsCount = getOptionsCount(randomOptions);

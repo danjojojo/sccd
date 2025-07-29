@@ -28,6 +28,14 @@ enum EAMOperation
     EAM_DECREASE
 };
 
+enum Orientations
+{
+    P1,
+    P2,
+    L1,
+    L2
+};
+
 enum PBOperation
 {
     PB_INCREASE,

@@ -10,9 +10,9 @@ unsigned long lastInteractionTime = 0;
 uint16_t selectedOptionFontColor = ED_COLOR;
 
 LabelIntValueLimitPageOptionsStruct plateBoardManagerOptions[] = {
-    {"Plates", &PLATES_NUM, &PLATES_LIM, nullptr},
-    {"Boards", &BOARDS_NUM, &BOARDS_LIM, nullptr},
-    {"Back to Settings", nullptr, nullptr, &settingsPage}};
+    {"P", &PLATES_NUM, &PLATES_LIM, nullptr},
+    {"B", &BOARDS_NUM, &BOARDS_LIM, nullptr},
+    {"Exit", nullptr, nullptr, &settingsPage}};
 
 int plateBoardManagerOptionsCount = getOptionsCount(plateBoardManagerOptions);
 int selectedPlateBoardManagerOption = 0;
@@ -95,7 +95,7 @@ void PlateBoardManagerPage::storePBValue(const char *key, const int32_t *value)
 
 void PlateBoardManagerPage::onEditTimeout()
 {
-    flicker(1000);
+    flicker(500);
     lastInteractionTime = 0;
     storePBValue(plateBoardManagerOptions[selectedPlateBoardManagerOption].label, plateBoardManagerOptions[selectedPlateBoardManagerOption].value);
     onPBClick = false;

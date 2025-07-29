@@ -10,14 +10,14 @@ unsigned long lastEAMInteractionTime = 0;
 uint16_t selectedEAMOptionFontColor = ED_COLOR;
 
 LabelIntValueLimitPageOptionsStruct eamOptionsPorB[] = {
-    {"Charlie", &CHARLIE_NUM, &BOARDS_LIMIT, nullptr},
-    {"Delta", &DELTA_NUM, &BOARDS_LIMIT, nullptr},
-    {"Missed", &MISSED_NUM, &MISSED_LIMIT, nullptr},
-    {"Back to Timer", nullptr, nullptr, &timerPage}};
+    {"C", &CHARLIE_NUM, &BOARDS_LIMIT, nullptr},
+    {"D", &DELTA_NUM, &BOARDS_LIMIT, nullptr},
+    {"M", &MISSED_NUM, &MISSED_LIMIT, nullptr},
+    {"Exit", nullptr, nullptr, &timerPage}};
 
 LabelIntValueLimitPageOptionsStruct eamOptionsPOnly[] = {
-    {"Missed", &MISSED_NUM, &MISSED_LIMIT, nullptr},
-    {"Back to Timer", nullptr, nullptr, &timerPage}};
+    {"M", &MISSED_NUM, &MISSED_LIMIT, nullptr},
+    {"Exit", nullptr, nullptr, &timerPage}};
 
 LabelIntValueLimitPageOptionsStruct *eamOptions;
 int editAfterMatchOptionsCount;

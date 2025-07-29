@@ -15,6 +15,7 @@ void loadTimerLogs();
 void loadRandomValue();
 void loadBattery();
 void loadConnection();
+void loadOrientation();
 void requestConnection();
 void loadReceivedData();
 void resetReceivedData();

@@ -13,29 +13,7 @@ LogsPage::LogsPage(Button &btn, PageManager &manager)
 
 void LogsPage::drawLogs()
 {
-    if (logsCount == 0)
-    {
-        tft.setTextColor(TFT_DARKGREY);
-        tft.drawString("No logs here.", 5, listOptionsPadding(0));
-        return;
-    }
-
     page.drawPaginatedLogs(logsCount, selectedLogNum);
-
-    // int line = 0;
-    // for (int i = logsCount - 1; i >= 0; i--)
-    // {
-    //     if (i == selectedLogNum)
-    //     {
-    //         tft.setTextColor(FG_COLOR);
-    //     }
-    //     else
-    //     {
-    //         tft.setTextColor(TFT_DARKGREY);
-    //     }
-    //     tft.drawString(TIMER_LOGS[i], 5, listOptionsPadding(line));
-    //     line++;
-    // }
 }
 
 void LogsPage::drawStatusBar()
@@ -46,6 +24,8 @@ void LogsPage::drawStatusBar()
 void LogsPage::enter()
 {
     logsCount = TIMER_LOG_NUM;
+    Serial.print("Logs count: ");
+    Serial.println(logsCount);
     getItemsPerPage(logsCount);
     selectedLogNum = (logsCount > 0) ? (logsCount - 1) : 0;
     
