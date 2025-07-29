@@ -19,6 +19,7 @@ void PageManager::setPage(Page *newPage)
     loadTimerLogs();
     loadRandomValue();
     resetReceivedData();
+    loadOrientation();
     currentPage->enter();
 }
 

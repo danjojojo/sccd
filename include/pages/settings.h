@@ -12,7 +12,9 @@
 #include "../pages/make_ready.h"
 #include "../pages/plate_board_manager.h"
 #include "../pages/set_random.h"
+#include "../pages/set_orientation.h"
 #include "../pages/set_theme.h"
+#include "../pages/turn_off.h"
 
 class SettingsPage : public Page
 {
@@ -29,9 +31,9 @@ public:
     void exit() override;
     void handleButtonPress() override;
     void drawStatusBar();
+    void shutOffDisplay();
     void drawButtons();
     void drawOptions();
-    void shutOffDisplay();
 };
 
 #endif

@@ -60,8 +60,8 @@ extern Preferences pref;
 extern Pangodream_18650_CL BL;
 extern int SENSOR_VALUE;
 extern float VOLTAGE;
-extern String BATTERY_LEVEL;
-// extern int BATTERY_LEVEL;
+// extern String BATTERY_LEVEL;
+extern int BATTERY_LEVEL;
 
 // INTERVALS FOR VOID LOOP IN MAIN.INO
 extern unsigned long LAST_ACTION_TIME;
@@ -76,10 +76,15 @@ extern ESPNowData TOSUBMIT_DATA;
 extern ESPNowData RECEIVED_DATA;
 
 // DRAW OPTIONS
-extern int PAGE_LIMIT;
 extern const int MAX_PAGES;
-extern int PAGES;
 extern int COLUMNS[];
+extern int PAGES;
 extern int CURRENT_PAGE;
+extern int PAGE_ITEMS_LIMIT;
+extern int START_COUNT; 
+extern int REFRESH_HEIGHT;
+
+// ORIENTATION
+extern String CURRENT_ORIENTATION;
 
 #endif

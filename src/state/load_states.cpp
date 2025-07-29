@@ -35,17 +35,17 @@ void loadThemeColors()
 void loadPlatesAndBoards()
 {
     pref.begin("pb", true);
-    PLATES_NUM = pref.getInt("Plates", 10);
-    BOARDS_NUM = pref.getInt("Boards", 5);
+    PLATES_NUM = pref.getInt("P", 10);
+    BOARDS_NUM = pref.getInt("B", 5);
     pref.end();
 }
 
 void loadEditAfterMatchBoards()
 {
     pref.begin("eam", true);
-    CHARLIE_NUM = pref.getInt("Charlie", 0);
-    DELTA_NUM = pref.getInt("Delta", 0);
-    MISSED_NUM = pref.getInt("Missed", 0);
+    CHARLIE_NUM = pref.getInt("C", 0);
+    DELTA_NUM = pref.getInt("D", 0);
+    MISSED_NUM = pref.getInt("M", 0);
     BOARDS_LIMIT = BOARDS_NUM * 2;
     MISSED_LIMIT = BOARDS_LIMIT + PLATES_NUM;
     pref.end();
@@ -54,22 +54,22 @@ void loadEditAfterMatchBoards()
 void resetEditAfterMatchBoards()
 {
     pref.begin("eam", false);
-    pref.putInt("Charlie", 0);
-    pref.putInt("Delta", 0);
-    pref.putInt("Missed", 0);
+    pref.putInt("C", 0);
+    pref.putInt("D", 0);
+    pref.putInt("M", 0);
     pref.end();
 }
 
 void loadTimerLogs()
 {
-    pref.begin("timerLogs", true);
+    pref.begin("timerLogs", false);
     TIMER_LOG_NUM = pref.getInt("logNum", 0);
     int NUM = 0;
     while (NUM < TIMER_LOG_NUM)
     {
         char LOG_KEY[20];
         sprintf(LOG_KEY, "log_%d", NUM);
-        String LOG_VALUE = pref.getString(LOG_KEY, "Log ends here");
+        String LOG_VALUE = pref.getString(LOG_KEY, "");
         TIMER_LOGS[NUM] = LOG_VALUE;
         NUM++;
     }
@@ -93,25 +93,25 @@ void loadBattery()
     switch (currentBatteryLevel)
     {
     case EMPTY:
-        BATTERY_LEVEL = String(VOLTAGE) + " ----";
+        BATTERY_LEVEL = 0;
         break;
     case ONE_BAR:
-        BATTERY_LEVEL = String(VOLTAGE) + " I---";
+        BATTERY_LEVEL = 1;
         break;
     case TWO_BARS:
-        BATTERY_LEVEL = String(VOLTAGE) + " II--";
+        BATTERY_LEVEL = 2;
         break;
     case THREE_BARS:
-        BATTERY_LEVEL = String(VOLTAGE) + " III-";
+        BATTERY_LEVEL = 3;
         break;
     case FOUR_BARS:
-        BATTERY_LEVEL = String(VOLTAGE) + " IIII";
+        BATTERY_LEVEL = 4;
         break;
     case FULL:
-        BATTERY_LEVEL = String(VOLTAGE) + " Full";
+        BATTERY_LEVEL = 5;
         break;
     case CHARGING:
-        BATTERY_LEVEL = String(VOLTAGE) + " Chrg";
+        BATTERY_LEVEL = 6;
         break;
     default:
         break;
@@ -139,4 +139,30 @@ void loadReceivedData()
 void resetReceivedData()
 {
     connect.resetData();
+}
+
+void loadOrientation(){
+    pref.begin("orientations", true);
+    String orientationValue = pref.getString("orientation", "L1");
+    CURRENT_ORIENTATION = orientationValue;
+    Orientations currentOrientation = getOrientation(orientationValue);
+    switch(currentOrientation){
+        case P1:
+            DISPLAY_ROTATION = 0;
+            break;
+        case P2:
+            DISPLAY_ROTATION = 2;
+            break;
+        case L1:
+            DISPLAY_ROTATION = 1;
+            break;
+        case L2:
+            DISPLAY_ROTATION = 3;
+            break;
+        default:
+            DISPLAY_ROTATION = 0;
+            break;
+    }
+    REFRESH_HEIGHT = DISPLAY_ROTATION == 0 | DISPLAY_ROTATION == 2 ? 200 : 90;
+    pref.end();
 }

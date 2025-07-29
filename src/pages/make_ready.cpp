@@ -19,8 +19,8 @@ void MakeReadyPage::drawStatusBar()
 void MakeReadyPage::enter()
 {
     page.tftInit();
-    page.drawTitle("Make Ready!");
-    page.drawButtons(RIGHT, "Start");
+    page.drawTitle("MAKE READY");
+    page.drawButtons(RIGHT, "START");
     drawStatusBar();
 }
 

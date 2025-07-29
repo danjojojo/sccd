@@ -6,16 +6,16 @@
 
 // PINS
 #define DISPLAY_BACKLIT 4
-#define BUZZER_PIN 2
-#define LEFT_BUTTON 0
-#define RIGHT_BUTTON 35
+#define BUZZER_PIN 13
+#define LEFT_BUTTON 2 // 2
+#define RIGHT_BUTTON 12 // 12
 
 // GPIOS
-#define WAKEUP_1 GPIO_NUM_0
-#define WAKEUP_2 GPIO_NUM_35
+#define WAKEUP_1 GPIO_NUM_2 // 2
+#define WAKEUP_2 GPIO_NUM_12 // 12
 
 // BATTERY
-#define ADC_PIN 33
+#define ADC_PIN 33 // 15
 #define CONV_FACTOR 1.76
 #define READS 20
 

@@ -17,7 +17,9 @@
 #include "../include/pages/plate_board_manager.h"
 #include "../include/pages/set_random.h"
 #include "../include/pages/set_theme.h"
+#include "../include/pages/set_orientation.h"
 #include "../include/pages/edit_after_match.h"
+#include "../include/pages/turn_off.h"
 
 // CONSTANTS
 #include "../include/constants/constants.h"
@@ -37,8 +39,10 @@ TimerPage timerPage(btn, pageManager);
 PlateBoardManagerPage plateBoardManagerPage(btn, pageManager);
 LogsPage logsPage(btn, pageManager);
 RandomPage randomPage(btn, pageManager);
+SetOrientationPage setOrientationPage(btn, pageManager);
 SetThemePage setThemePage(btn, pageManager);
 EditAfterMatchPage editAfterMatchPage(btn, pageManager);
+TurnOffPage turnOffPage(btn, pageManager);
 
 void setup()
 {

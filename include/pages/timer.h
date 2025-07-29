@@ -19,6 +19,7 @@ private:
     Button &button;
     PageManager &pageManager;
     TFT_eSPI tft = TFT_eSPI();
+    TFT_eSprite spr = TFT_eSprite(&tft);
     Preferences timerPreferences;
     PageTemplate page;
 
